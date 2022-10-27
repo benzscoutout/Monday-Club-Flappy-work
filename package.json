@@ -1,0 +1,6 @@
+{
+    "scripts": {
+
+        "deploy:prod" : "firebase use monday-club-48189 && firebase target:clear hosting game-flappy-work && firebase target:apply hosting game-flappy-work game-flappy-work && firebase deploy --only hosting:game-flappy-work"
+    }
+}

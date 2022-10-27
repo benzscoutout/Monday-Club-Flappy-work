@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "monday-club-48189"
+  },
+  "targets": {
+    "monday-club-48189": {
+      "hosting": {
+        "game-flappy-work": [
+          "game-flappy-work"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

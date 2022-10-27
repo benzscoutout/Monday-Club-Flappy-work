@@ -13,7 +13,7 @@ var playend = false, playdata = [];
 var wxData;
 
 var clearCanvas = function(){
-	ctx.fillStyle = '#4EC0CA';
+	ctx.fillStyle = '#F9F5EB';
 	ctx.fillRect(0, 0, width, height);
 }
 
