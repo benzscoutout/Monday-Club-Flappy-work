@@ -1,7 +1,7 @@
 {
   "hosting": [{
       "target": "game-flappy-work",
-      "public": "web",
+      "public": "build",
       "ignore": [
         "firebase.json",
         "**/.*",

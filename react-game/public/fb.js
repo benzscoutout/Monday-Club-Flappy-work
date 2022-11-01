@@ -12,6 +12,15 @@ var wechat = false;
 var playend = false, playdata = [];
 var wxData;
 
+export default class PlayStat{
+
+	 getPlayEnd() {
+
+		return playend;
+		
+	}
+}
+
 var clearCanvas = function(){
 	ctx.fillStyle = '#F9F5EB';
 	ctx.fillRect(0, 0, width, height);
@@ -123,6 +132,16 @@ var deathAnimation = function(){
 	ctx.drawImage(ready, width / 2 - 57, height / 2 + 10);
 	maxScore = Math.max(maxScore, score);
 }
+
+export default function reportScore(){
+	return score;
+}
+
+export default function checkDeath(){
+	return playend;
+}
+
+
 
 var drawSky = function(){
 	var totWidth = 0;
@@ -384,13 +403,13 @@ window.onload = function(){
 	mode = 2;
 	delta = 100;
 	initCanvas();
-	easy = document.getElementById("easy");
-    easy.onclick = easyMode;
-	normal = document.getElementById("normal");
-    normal.onclick = normalMode;
-	hard = document.getElementById("hard");
-    hard.onclick = hardMode;
-	document.getElementById("flashlight").onclick = flashlight;
+	// easy = document.getElementById("easy");
+    // easy.onclick = easyMode;
+	// normal = document.getElementById("normal");
+    // normal.onclick = normalMode;
+	// hard = document.getElementById("hard");
+    // hard.onclick = hardMode;
+	// document.getElementById("flashlight").onclick = flashlight;
 	//document.getElementById("hidden").onclick = hidden;
 	window.onresize = function() {
 		canvas.width = width = window.innerWidth;
@@ -398,3 +417,5 @@ window.onload = function(){
 		drawCanvas();
 	}
 }
+
+
