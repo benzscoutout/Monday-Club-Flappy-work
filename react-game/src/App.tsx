@@ -1,17 +1,17 @@
-import React, { useEffect } from 'react';
-import logo from './logo.svg';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './App.css';
-import  * as PlayStat from '../public/fb.js';
+import LandingComponent from "./component/landing";
+import 'bootstrap/dist/css/bootstrap.min.css';
 function App()  {
 
-
-  useEffect(() => {
-    console.log(PlayStat);
-   
-  })
  
   return (
-    <canvas id="canvas">Flappy work</canvas>
+    <BrowserRouter>
+
+      <Routes>
+        <Route path="/" element={<LandingComponent />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

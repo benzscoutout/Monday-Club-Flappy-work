@@ -1,0 +1,124 @@
+
+
+.modal-content{
+
+    height: 100% !important;
+}
+
+.modal-control{
+    background: rgba(0,0,0,0.5);
+    position: absolute;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+    top: 0;
+    left: 0;
+}
+
+.Modal {
+    position: absolute;
+    left: 40px;
+    height: 0px;
+    z-index: 90999;
+    min-height: 250px;
+    padding-bottom: 40px;
+    display: flex;
+    width: 400px;
+    right: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    top:0;
+    bottom:0;
+    margin-top: auto;
+    margin-bottom: auto;
+    border-radius: 16px;
+    background-color: black !important;
+
+
+
+   
+}
+.score-control{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+
+    
+}
+.text-score-header{
+    font-size: 30px;
+    color: white;
+    text-align: center;
+}
+
+.text-score{
+    font-size: 70px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.close-text{
+    cursor: pointer;
+    color: white;
+    margin-top: auto;
+    font-size: 16px;
+    text-decoration: underline;
+    text-align: center;
+}
+@media screen and (max-width: 768px) {
+    .Modal {
+        left: 0;
+        right: 0;
+        width: 80%;
+    }
+}
+
+.Overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    right: 0;
+    bottom: 0;
+    background-color:  rgba(0, 0, 0, 0.5);
+}
+
+.input-control{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.button-start {
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+    border: none;
+    font-size: 14px;
+    margin-top: 16px;
+    font-weight: bold;
+    border-radius: 12px;
+    background-color: #F7AF31;
+    height: 41px;
+    color: white;
+    width: 50%;
+}
+
+.input-style{
+    width: 80%;
+    height: 51px;
+    border-radius: 14px;
+    margin-left: auto;
+    padding-left: 24px;
+    padding-right: 24px;
+    font-size: 30px;
+    text-align: center;
+    font-weight: bold;
+    margin-right: auto;
+}

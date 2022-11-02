@@ -770,8 +770,14 @@ FastClick.notNeeded = function(layer) {
  */
 FastClick.attach = function(layer) {
 	'use strict';
+	console.log('test');
 	return new FastClick(layer);
 };
+
+export const attach2 = (layer) => {
+	console.log(layer);
+	new FastClick(layer);
+}
 
 
 if (typeof define !== 'undefined' && define.amd) {
