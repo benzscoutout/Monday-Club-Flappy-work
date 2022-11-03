@@ -1,0 +1,116 @@
+
+
+.lb-control{
+    display: flex;
+    flex-direction: column;
+    padding-top: 5%;
+    background-color: rgba(0, 0, 0, 0.8);
+    min-height: 600px;
+    padding-bottom: 5%;
+    padding-left: 15%;
+    padding-right: 15%;
+    min-height: 1000px;
+   
+}
+@media screen and (max-width: 768px) {
+    .leader-board-text{
+        font-size: 15px;
+    }
+
+    .text-header-leader{
+        font-size: 24px;
+    }
+
+    .button-home{
+        font-size: 20px;
+    }
+    .grid-item{
+        border: 1px white solid;
+        padding-top: 3px;
+        padding-bottom: 3px;
+    }
+
+    .img-city{
+        background-position: bottom !important;
+    }
+
+    .lb-control{
+        padding-left: 0%;
+        padding-right: 0%;
+    }
+}
+.img-logo {
+    width: 150px;
+    height: auto;
+    object-fit: contain;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.text-header-leader{
+    font-size: 40px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.img-city {
+    position: absolute;
+    background: url(../../assets/images/city.png);
+    background-repeat: repeat-x;
+    background-size: contain;
+    height: 300px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    position: fixed;
+    margin-top: 60px;
+    width: 100%;
+    object-fit: contain;
+    margin-left: auto;
+    margin-right: auto;
+}
+.button-home {
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+    border: none;
+    font-size: 26px;
+    font-weight: bold;
+    border-radius: 12px;
+    background-color: #F7AF31;
+    height: 51px;
+    color: white;
+    width: 50%;
+    margin-top: 24px;
+    margin-bottom: 16px;
+}
+.grid-control{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.grid-leader{
+    display: grid;
+    grid-template-columns: 20% 40% 40%;
+  
+    margin-left: auto;
+    width: 80%;
+    margin-right: auto;
+}
+
+.grid-item{
+    border: 2px white solid;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+.leader-board-text{
+    color: white;
+    text-align: center;
+    font-size: 18px;
+
+}

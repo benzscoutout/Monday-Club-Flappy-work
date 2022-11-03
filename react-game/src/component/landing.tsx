@@ -8,12 +8,15 @@ import { initializeApp } from 'firebase/app';
 import { collection, getDocs, getFirestore, limit, orderBy, query } from 'firebase/firestore';
 import ApiServices from './services/api-service';
 import { useNavigate } from "react-router-dom";
+import UtilityService from './services/utility';
 const app = initializeApp(config.firebaseConfig);
 export const db = getFirestore(app);
 const LandingComponent = () => {
     let navigate = useNavigate();
     const [isName, setIsName] = useState(false);
-    const [name, setName] = useState('name');
+    const [name, setName] = useState('');
+    const [isSaveScore, setSaveScore] = useState(false);
+    const [isSubmitting, setSaveSubmitting] = useState(false);
     const [isChangeSpeed, setChangeSpeed] = useState(false);
     const canvasRef = React.useRef(null);
     var width: any, height: any, birdPos: any;
@@ -21,7 +24,7 @@ const LandingComponent = () => {
     var dist: any, birdY: any, birdF: any, birdN: any, birdV: any;
     var animation: any, death: any, deathAnim: any;
     var pipes: any = [], pipesDir: any = [], pipeSt: any, pipeNumber: any;
-    var score: any ;
+    var score: any;
     var dropSpeed: any;
     var flashlight_switch = false, hidden_switch = false;
     var mode: any, delta: any;
@@ -178,8 +181,8 @@ const LandingComponent = () => {
                 setDeath(true);
             }
             ctx.drawImage(ready, width / 2 - 57, height / 2 + 10);
-           const maxScore2 = Math.max(maxScore, score);
-           setMaxScore(maxScore2);
+            const maxScore2 = Math.max(maxScore, score);
+            setMaxScore(maxScore2);
 
 
 
@@ -331,55 +334,66 @@ const LandingComponent = () => {
 
     var anim = function () {
 
-        if(maxScore > 10){
+        if (maxScore > 10) {
             animation = setInterval(drawCanvas, 500 / 60);
-        }else{
+        } else {
             animation = setInterval(drawCanvas, 1000 / 60);
         }
-     
+
     }
 
     var jump = function () {
 
-        if(!isDeath){
+        if (!isDeath) {
 
-        
-        if (death) {
-            dist = 0;
-            birdY = (height - 112) / 2;
-            birdF = 0;
-            birdN = 0;
-            birdV = 0;
-            death = 0;
-            score = 0;
-            birdPos = width * 0.35;
-            pipeSt = 0;
-            pipeNumber = 10;
-            pipes = [];
-            pipesDir = [];
-            for (var i = 0; i < 10; ++i) {
-                pipes.push(Math.floor(Math.random() * (height - 300 - delta) + 10));
-                pipesDir.push((Math.random() > 0.5));
+
+            if (death) {
+                dist = 0;
+                birdY = (height - 112) / 2;
+                birdF = 0;
+                birdN = 0;
+                birdV = 0;
+                death = 0;
+                score = 0;
+                birdPos = width * 0.35;
+                pipeSt = 0;
+                pipeNumber = 10;
+                pipes = [];
+                pipesDir = [];
+                for (var i = 0; i < 10; ++i) {
+                    pipes.push(Math.floor(Math.random() * (height - 300 - delta) + 10));
+                    pipesDir.push((Math.random() > 0.5));
+                }
+                animation = setInterval(drawCanvas, 800 / 60);
+            } else {
+
             }
-            animation = setInterval(drawCanvas, 800 / 60);
-        }else{
-           
-        }
-        if (mode == 0)
-            birdV = 6;
-        else if (mode == 1)
-            birdV = 6;
-        else
-            birdV = 6;
+            if (mode == 0)
+                birdV = 6;
+            else if (mode == 1)
+                birdV = 6;
+            else
+                birdV = 6;
         }
     }
     const handleSubmit = (e: any) => {
         e.preventDefault();
-        setIsName(true);
-        console.log(maxScore);
-        ApiServices().writeUserData(maxScore, false, name);
 
-        // UtilityService().clickSendEvent('Click', 'Play', 'Submit ' + name + ' : ' + score);
+        console.log(maxScore);
+        if (name.length === 0) {
+
+        } else {
+            setSaveSubmitting(true)
+            setSaveScore(false);
+            setIsName(true);
+            ApiServices().writeUserData(maxScore, false, name).then((res) => {
+                UtilityService().clickSendEvent('Click', 'Play', 'Submit ' + name + ' : ' + score);
+                setSaveScore(true);
+            });
+        }
+
+
+      
     }
 
     const handleChange = (e: any) => {
@@ -389,6 +403,11 @@ const LandingComponent = () => {
 
     const closeModal = () => {
         window.open('/', '_self');
+    }
+
+    const gotoLeaderBoard = () => {
+        navigate('/leaderboard');
+        UtilityService().clickSendEvent('Click', 'Play', 'Go to Leaderboard' );
     }
     return (
         <>
@@ -401,21 +420,32 @@ const LandingComponent = () => {
                             <div className="Modal" >
 
                                 {
-                                    !isName ?
+                                    !isName && !isSubmitting ?
                                         <div className="score-control">
                                             <h2 className="text-score-header">Your name</h2>
                                             <form onSubmit={handleSubmit}>
                                                 <div className="input-control">
                                                     <input type="text" name="name" onChange={handleChange} maxLength={8} className="input-style" />
-                                                    <input type="submit" value="Submit" className="button-start" />
+                                                    <input type="submit" value="Submit" className={
+                                                        name.length == 0 ? 'button-start-disable' : 'button-start'
+                                                    } />
                                                 </div>
                                             </form>
                                         </div> :
-                                        <div className="score-control">
-                                            <h2 className="text-score-header">Your Score</h2>
-                                            <span className="text-score">{maxScore}</span>
-                                            <span className="close-text" onClick={closeModal}>close</span>
-                                        </div>
+                                        isSubmitting && !isSaveScore ?
+
+                                            <div className="score-control">
+                                                <span className="text-saving">Saving ...</span>
+                                            </div> :
+
+                                            isSaveScore &&
+
+                                            <div className="score-control">
+                                                <h2 className="text-score-header">Your Score</h2>
+                                                <span className="text-score">{maxScore}</span>
+                                                <button className='button-leaderboard' onClick={gotoLeaderBoard}>Leaderboard</button>
+                                                <span className="close-text" onClick={closeModal}>close</span>
+                                            </div> 
                                 }
                             </div>
                         </div>
